@@ -110,3 +110,7 @@ def blog_like(request, id):
     new_like = BlogLike(user=user, blog=blog)
     new_like.save()
     return redirect(reverse('blog_list_page'))
+
+
+def aha(request):
+    return redirect(reverse('blog_list_page'))
