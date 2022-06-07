@@ -1,0 +1,25 @@
+<!-- Start header -->
+<header class="top-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="/static/images/logo.png" alt=""/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food"
+                    aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbars-rs-food">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if request.resolver_match.url_name == 'home_page' %}active{% endif %}"><a class="nav-link" href="{% url 'home_page' %}">خانه</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'food_list_page' %}active{% endif %}"><a class="nav-link" href="{% url 'food_list_page' %}">منو غذا ها</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'reservation_page' %}active{% endif %}"><a class="nav-link" href="{% url 'reservation_page' %}">رزرو کردن میز</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'blog_list_page' %}active{% endif %}"><a class="nav-link" href="{% url 'blog_list_page' %}">مقاله ها</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'gallery_page' %}active{% endif %}"><a class="nav-link " href="{% url 'gallery_page' %}">گالری عکس ها</a></li>
+                    <li class="nav-item {% if request.resolver_match.url_name == 'contact_us_page' %}active{% endif %}"><a class="nav-link" href="{% url 'contact_us_page' %}">ارتباط با ما</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- End header -->

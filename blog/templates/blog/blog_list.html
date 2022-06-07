@@ -1,0 +1,73 @@
+{% extends 'shared/index.html' %}
+{% load thumbnail %}
+{% block title %}
+   لیست مقالات
+{% endblock %}
+
+{% block content %}
+    <!-- Start All Pages -->
+    <div class="all-page-title page-breadcrumb">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Blog</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Pages -->
+
+    <!-- Start blog -->
+    <div class="blog-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="heading-title text-center">
+                        <h2>Blog</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for blog in blogs %}
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="blog-box-inner">
+                            <div class="blog-img-box">
+                                {% thumbnail blog.image "470x570" quality=90 crop="center" as im %}
+                                    <img class="img-fluid" src="{{ im.url }}" alt="">
+                                {% endthumbnail %}
+                            </div>
+                            <div class="blog-detail">
+                                <h4>{{ blog.title }}</h4>
+                                <ul>
+                                    <li><span>Post by {{ blog.author }}</span></li>
+                                    <li>|</li>
+                                    <li><span>{{ blog.created_at | date:"Y b d" }}</span></li>
+                                </ul>
+                                <p> {{ blog.description }} </p>
+                                <p dir="rtl">{{ blog.content|truncatewords:90 }} </p>
+                                <a class="btn btn-lg btn-circle btn-outline-new-white"
+                                   href="{% url 'blog_detail_page' pk=blog.id %}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">قبلی</a></li>
+                {% endif %}
+                {% for pageNumber in paginator.page_range %}
+                    <li class="{% if page_obj.number == pageNumber %} active {% endif %}">
+                        <a href="?page={{ pageNumber }}">{{ pageNumber }}</a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">بعدی</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+    <!-- End blog -->
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'shared/index.html' %}
+{% load thumbnail %}
+{% block title %}
+    لیست غذا ها
+{% endblock %}
+{% block content %}
+
+    <div class="menu-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="heading-title text-center">
+                        <h2>Special Menu</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="special-menu text-center">
+                        <div class="button-group filter-button-group">
+                            <button class="active" data-filter="*">All</button>
+                            <button data-filter=".drinks">Drinks</button>
+                            <button data-filter=".lunch">Lunch</button>
+                            <button data-filter=".dinner">Dinner</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for food in foods %}
+                <a href="{% url 'food_detail_page' slug=food.slug %}">
+                    <div class="row special-list" style="position: relative; height: 810px;">
+                        <div class="col-lg-4 col-md-6 special-grid {{ food.type_food }}"
+                             style="position: absolute; left: 0px; top: 0px;">
+                            <div class="gallery-single fix">
+                                {% thumbnail food.photo "350x210" quality=95 crop='center' as im %}
+                                    <img src="{{ im.url }}" class="img-fluid" alt="Image">
+                                {% endthumbnail %}
+                                <div class="why-text">
+                                    <h4>{{ food.name }}</h4>
+                                    <p>{{ food.description }}</p>
+                                    <h5> {{ food.price }}</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+                <form action="{% url 'kharid' id=food.id%}">
+                    <Button> kharid</Button>
+                </form>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
